@@ -5,6 +5,7 @@ const {
   SignUpCommand,
   InitiateAuthCommand,
   AdminAddUserToGroupCommand,
+  GetUserCommand,
 } = require('@aws-sdk/client-cognito-identity-provider');
 
 const cognitoClient = new CognitoIdentityProviderClient({
@@ -15,7 +16,7 @@ const USER_POOL_ID = process.env.COGNITO_USER_POOL_ID;
 const CLIENT_ID = process.env.COGNITO_CLIENT_ID;
 
 async function signup(req, res) {
-  const { email, password, role, teamId } = req.body;
+  const { email, password, role, teamId, name } = req.body;
 
   if (!email || !password || !role) {
     return res.status(400).json({ message: 'email, password, and role are required' });
@@ -32,13 +33,13 @@ async function signup(req, res) {
       Password: password,
       UserAttributes: [
         { Name: 'email', Value: email },
+        { Name: 'name', Value: name || email },
         { Name: 'custom:role', Value: role },
         { Name: 'custom:teamId', Value: teamId || '' },
       ],
     })
   );
 
-  // Add user to the matching Cognito group (Manager / Employee)
   await cognitoClient.send(
     new AdminAddUserToGroupCommand({
       UserPoolId: USER_POOL_ID,
@@ -61,19 +62,38 @@ async function signin(req, res) {
     new InitiateAuthCommand({
       AuthFlow: 'USER_PASSWORD_AUTH',
       ClientId: CLIENT_ID,
-      AuthParameters: {
-        USERNAME: email,
-        PASSWORD: password,
-      },
+      AuthParameters: { USERNAME: email, PASSWORD: password },
     })
   );
 
   res.json({
-    accessToken: AuthenticationResult.AccessToken,
     idToken: AuthenticationResult.IdToken,
+    accessToken: AuthenticationResult.AccessToken,
     refreshToken: AuthenticationResult.RefreshToken,
     expiresIn: AuthenticationResult.ExpiresIn,
   });
 }
 
-module.exports = { signup, signin };
+/**
+ * GET /auth/me — protected; returns the caller's profile derived from their token.
+ * req.user is already populated by authMiddleware.
+ */
+async function me(req, res) {
+  // Fetch full profile from Cognito for the canonical name attribute
+  const { UserAttributes } = await cognitoClient.send(
+    new GetUserCommand({ AccessToken: req.headers['x-access-token'] || '' })
+  ).catch(() => ({ UserAttributes: [] }));
+
+  const attrs = Object.fromEntries((UserAttributes || []).map((a) => [a.Name, a.Value]));
+
+  res.json({
+    id: req.user.userId,
+    email: req.user.email,
+    name: attrs.name || req.user.email,
+    role: req.user.role.toLowerCase(),
+    teamId: req.user.teamId || null,
+    title: req.user.role,
+  });
+}
+
+module.exports = { signup, signin, me };

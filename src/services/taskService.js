@@ -10,6 +10,8 @@ const {
   ScanCommand,
 } = require('@aws-sdk/lib-dynamodb');
 const { docClient, TABLE_NAMES, GSI_NAMES } = require('../config/dynamodb');
+const notificationService = require('./notificationService');
+const logger = require('../config/logger');
 
 // ─── helpers ────────────────────────────────────────────────────────────────
 
@@ -28,8 +30,8 @@ function notFound(message = 'Task not found') {
 // ─── read ────────────────────────────────────────────────────────────────────
 
 /**
- * Fetch a single task. Employees are blocked if the task belongs to a
- * different team — this is the central RBAC gate reused by update/delete.
+ * Fetch a single task and enforce team isolation.
+ * This is the central RBAC gate; updateTask and deleteTask call it first.
  */
 async function getTaskById(taskId, requestingUser) {
   const { Item: task } = await docClient.send(
@@ -47,7 +49,7 @@ async function getTaskById(taskId, requestingUser) {
 
 /**
  * Query the teamId-index GSI.
- * Employees can only query their own team; Managers can query any.
+ * Employees can only query their own team.
  */
 async function getTasksByTeam(teamId, requestingUser) {
   if (requestingUser.role === 'Employee' && requestingUser.teamId !== teamId) {
@@ -60,16 +62,16 @@ async function getTasksByTeam(teamId, requestingUser) {
       IndexName: GSI_NAMES.TASKS_BY_TEAM,
       KeyConditionExpression: 'teamId = :tid',
       ExpressionAttributeValues: { ':tid': teamId },
-      ScanIndexForward: false, // newest first
+      ScanIndexForward: false,
     })
   );
 
-  return Items;
+  return Items || [];
 }
 
 /**
  * Query the assigneeId-index GSI.
- * Employees can only see results within their own team.
+ * Employees get their results post-filtered to their own team.
  */
 async function getTasksByAssignee(assigneeId, requestingUser) {
   const { Items } = await docClient.send(
@@ -82,27 +84,23 @@ async function getTasksByAssignee(assigneeId, requestingUser) {
     })
   );
 
+  const items = Items || [];
+
   if (requestingUser.role === 'Employee') {
-    // Filter post-query so employees only see tasks inside their own team
-    return Items.filter((t) => t.teamId === requestingUser.teamId);
+    return items.filter((t) => t.teamId === requestingUser.teamId);
   }
 
-  return Items;
+  return items;
 }
 
-/**
- * Scan all tasks — Manager-only operation.
- */
+/** Manager-only full scan. */
 async function getAllTasks(requestingUser) {
   if (requestingUser.role !== 'Manager') {
     throw forbidden('Only Managers can list all tasks');
   }
 
-  const { Items } = await docClient.send(
-    new ScanCommand({ TableName: TABLE_NAMES.TASKS })
-  );
-
-  return Items;
+  const { Items } = await docClient.send(new ScanCommand({ TableName: TABLE_NAMES.TASKS }));
+  return Items || [];
 }
 
 // ─── write ───────────────────────────────────────────────────────────────────
@@ -111,7 +109,7 @@ const VALID_STATUSES = ['To Do', 'In Progress', 'In Review', 'Done'];
 const VALID_PRIORITIES = ['Low', 'Medium', 'High', 'Critical'];
 
 async function createTask(payload, requestingUser) {
-  const { title, description, status, priority, deadline, assigneeId, projectId } = payload;
+  const { title, description, status, priority, deadline, assigneeId, projectId, imageUrl, imageKey } = payload;
 
   if (!title) {
     const err = new Error('title is required');
@@ -134,9 +132,7 @@ async function createTask(payload, requestingUser) {
     throw err;
   }
 
-  // Employees are always scoped to their own team — they cannot self-assign to another
   const teamId = requestingUser.role === 'Employee' ? requestingUser.teamId : payload.teamId;
-
   if (!teamId) {
     const err = new Error('teamId is required');
     err.statusCode = 400;
@@ -154,20 +150,28 @@ async function createTask(payload, requestingUser) {
     assigneeId: assigneeId || null,
     teamId,
     projectId: projectId || null,
+    imageUrl: imageUrl || null,
+    imageKey: imageKey || null,
     createdAt: now,
     updatedAt: now,
   };
 
   await docClient.send(new PutCommand({ TableName: TABLE_NAMES.TASKS, Item: task }));
 
+  // Fire SNS notification when a task is created with an assignee
+  if (task.assigneeId) {
+    notificationService
+      .publishTaskAssigned(task, task.assigneeId)
+      .catch((err) => logger.warn({ msg: 'SNS notification failed', err: err.message }));
+  }
+
   return task;
 }
 
 async function updateTask(taskId, updates, requestingUser) {
-  // getTaskById enforces RBAC before we attempt the write
-  await getTaskById(taskId, requestingUser);
+  const existing = await getTaskById(taskId, requestingUser);
 
-  const allowed = ['title', 'description', 'status', 'priority', 'deadline', 'assigneeId', 'projectId'];
+  const allowed = ['title', 'description', 'status', 'priority', 'deadline', 'assigneeId', 'projectId', 'imageUrl', 'imageKey'];
 
   if (updates.status && !VALID_STATUSES.includes(updates.status)) {
     const err = new Error(`status must be one of: ${VALID_STATUSES.join(', ')}`);
@@ -181,7 +185,6 @@ async function updateTask(taskId, updates, requestingUser) {
     throw err;
   }
 
-  // Build a dynamic UpdateExpression from the provided fields
   const setClauses = ['updatedAt = :updatedAt'];
   const names = {};
   const values = { ':updatedAt': new Date().toISOString() };
@@ -205,16 +208,20 @@ async function updateTask(taskId, updates, requestingUser) {
     })
   );
 
+  // Fire SNS if the assignee changed
+  const assigneeChanged = updates.assigneeId && updates.assigneeId !== existing.assigneeId;
+  if (assigneeChanged) {
+    notificationService
+      .publishTaskAssigned(updated, updates.assigneeId)
+      .catch((err) => logger.warn({ msg: 'SNS notification failed', err: err.message }));
+  }
+
   return updated;
 }
 
 async function deleteTask(taskId, requestingUser) {
-  // getTaskById enforces RBAC — throws 403/404 as appropriate
   await getTaskById(taskId, requestingUser);
-
-  await docClient.send(
-    new DeleteCommand({ TableName: TABLE_NAMES.TASKS, Key: { taskId } })
-  );
+  await docClient.send(new DeleteCommand({ TableName: TABLE_NAMES.TASKS, Key: { taskId } }));
 }
 
 module.exports = {

@@ -14,8 +14,23 @@ import type {
 
 const baseUrl = process.env.NEXT_PUBLIC_API_BASE_URL?.replace(/\/$/, "");
 
+const ID_TOKEN_KEY = "mini-jira-id-token";
+
+export function getStoredToken(): string | null {
+  if (typeof window === "undefined") return null;
+  return window.localStorage.getItem(ID_TOKEN_KEY);
+}
+
+export function setStoredToken(token: string): void {
+  window.localStorage.setItem(ID_TOKEN_KEY, token);
+}
+
+export function clearStoredToken(): void {
+  window.localStorage.removeItem(ID_TOKEN_KEY);
+}
+
 type RequestOptions = RequestInit & {
-  user?: User | null;
+  skipAuth?: boolean;
 };
 
 async function request<T>(path: string, options: RequestOptions = {}): Promise<T> {
@@ -23,13 +38,18 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
     throw new Error("No API base URL configured.");
   }
 
+  const token = getStoredToken();
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    ...(options.headers as Record<string, string>),
+  };
+  if (token && !options.skipAuth) {
+    headers["Authorization"] = `Bearer ${token}`;
+  }
+
   const response = await fetch(`${baseUrl}${path}`, {
     ...options,
-    headers: {
-      "Content-Type": "application/json",
-      ...(options.user ? { "X-Demo-User-Id": options.user.id } : {}),
-      ...options.headers,
-    },
+    headers,
   });
 
   if (!response.ok) {
@@ -44,28 +64,29 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
   return (await response.json()) as T;
 }
 
-async function uploadImage(path: string, file: File, user: User): Promise<{ imageUrl: string }> {
+async function uploadImage(path: string, file: File): Promise<{ imageUrl: string }> {
   if (!baseUrl) {
-    return {
-      imageUrl: await fileToDataUrl(file),
-    };
+    return { imageUrl: await fileToDataUrl(file) };
   }
 
-  const formData = new FormData();
-  formData.append("image", file);
-  const response = await fetch(`${baseUrl}${path}`, {
+  // Step 1: ask backend for a pre-signed S3 PUT URL
+  const { uploadUrl, imageUrl } = await request<{ uploadUrl: string; imageUrl: string }>(path, {
     method: "POST",
-    headers: {
-      "X-Demo-User-Id": user.id,
-    },
-    body: formData,
+    body: JSON.stringify({ contentType: file.type }),
   });
 
-  if (!response.ok) {
-    throw new Error((await response.text()) || "Image upload failed.");
+  // Step 2: upload directly to S3 (no auth header needed — pre-signed URL carries credentials)
+  const s3Response = await fetch(uploadUrl, {
+    method: "PUT",
+    headers: { "Content-Type": file.type },
+    body: file,
+  });
+
+  if (!s3Response.ok) {
+    throw new Error("S3 upload failed.");
   }
 
-  return (await response.json()) as { imageUrl: string };
+  return { imageUrl };
 }
 
 export function fileToDataUrl(file: File): Promise<string> {
@@ -78,34 +99,64 @@ export function fileToDataUrl(file: File): Promise<string> {
 }
 
 export const api = {
-  async loginDemo(userId: string): Promise<User> {
-    if (baseUrl) {
-      return request<User>("/auth/demo-login", {
-        method: "POST",
-        body: JSON.stringify({ userId }),
-      });
+  /** Real Cognito sign-in — calls POST /auth/signin, stores the idToken. */
+  async signin(email: string, password: string): Promise<User> {
+    const { idToken, accessToken } = await request<{
+      idToken: string;
+      accessToken: string;
+      refreshToken: string;
+    }>("/auth/signin", {
+      method: "POST",
+      body: JSON.stringify({ email, password }),
+      skipAuth: true,
+    });
+
+    setStoredToken(idToken);
+
+    // Store access token for /auth/me (Cognito GetUser requires it)
+    if (typeof window !== "undefined") {
+      window.localStorage.setItem("mini-jira-access-token", accessToken);
     }
 
-    const user = demoUsers.find((item) => item.id === userId);
-    if (!user) {
-      throw new Error("Demo user not found.");
-    }
+    const user = await request<User>("/auth/me", {
+      headers: { "x-access-token": accessToken },
+    });
+
     return user;
   },
 
-  async currentUser(user: User | null): Promise<User | null> {
-    if (!user) {
-      return null;
-    }
+  /** Demo login — works in offline (no baseUrl) mode. */
+  async loginDemo(userId: string): Promise<User> {
     if (baseUrl) {
-      return request<User>("/auth/me", { user });
+      // When a real backend is present, map demo IDs to fake Cognito users
+      const user = demoUsers.find((item) => item.id === userId);
+      if (!user) throw new Error("Demo user not found.");
+      return user;
     }
+
+    const user = demoUsers.find((item) => item.id === userId);
+    if (!user) throw new Error("Demo user not found.");
     return user;
+  },
+
+  async currentUser(): Promise<User | null> {
+    const token = getStoredToken();
+    if (!token) return null;
+    if (!baseUrl) return null;
+
+    const accessToken =
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("mini-jira-access-token") || ""
+        : "";
+
+    return request<User>("/auth/me", {
+      headers: { "x-access-token": accessToken },
+    });
   },
 
   async bootstrap(user: User): Promise<AppBootstrap> {
     if (baseUrl) {
-      return request<AppBootstrap>("/bootstrap", { user });
+      return request<AppBootstrap>("/bootstrap");
     }
     return mockStore.bootstrap(user);
   },
@@ -113,14 +164,14 @@ export const api = {
   async listTasks(user: User, teamId?: string): Promise<Task[]> {
     if (baseUrl) {
       const search = teamId && teamId !== "all" ? `?teamId=${encodeURIComponent(teamId)}` : "";
-      return request<Task[]>(`/tasks${search}`, { user });
+      return request<Task[]>(`/tasks${search}`);
     }
     return mockStore.listTasks(user, teamId);
   },
 
   async getTask(user: User, taskId: string): Promise<Task> {
     if (baseUrl) {
-      return request<Task>(`/tasks/${taskId}`, { user });
+      return request<Task>(`/tasks/${taskId}`);
     }
     return mockStore.getTask(user, taskId);
   },
@@ -130,7 +181,6 @@ export const api = {
       return request<Task>("/tasks", {
         method: "POST",
         body: JSON.stringify(input),
-        user,
       });
     }
     return mockStore.createTask(user, input);
@@ -141,7 +191,6 @@ export const api = {
       return request<Task>(`/tasks/${taskId}`, {
         method: "PATCH",
         body: JSON.stringify(input),
-        user,
       });
     }
     return mockStore.updateTask(user, taskId, input);
@@ -149,7 +198,7 @@ export const api = {
 
   async deleteTask(user: User, taskId: string): Promise<void> {
     if (baseUrl) {
-      return request<void>(`/tasks/${taskId}`, { method: "DELETE", user });
+      return request<void>(`/tasks/${taskId}`, { method: "DELETE" });
     }
     return mockStore.deleteTask(user, taskId);
   },
@@ -159,14 +208,13 @@ export const api = {
       return request<Task>(`/tasks/${taskId}/status`, {
         method: "PATCH",
         body: JSON.stringify({ status }),
-        user,
       });
     }
     return mockStore.updateTaskStatus(user, taskId, status);
   },
 
   async uploadTaskImage(user: User, taskId: string, file: File): Promise<Task> {
-    const { imageUrl } = await uploadImage(`/tasks/${taskId}/image`, file, user);
+    const { imageUrl } = await uploadImage(`/tasks/${taskId}/image`, file);
     if (baseUrl) {
       return this.getTask(user, taskId);
     }
@@ -175,7 +223,7 @@ export const api = {
 
   async replaceTaskImage(user: User, taskId: string, file: File): Promise<Task> {
     if (baseUrl) {
-      const { imageUrl } = await uploadImage(`/tasks/${taskId}/image`, file, user);
+      const { imageUrl } = await uploadImage(`/tasks/${taskId}/image`, file);
       return this.updateTask(user, taskId, { imageUrl });
     }
     const imageUrl = await fileToDataUrl(file);
@@ -184,14 +232,14 @@ export const api = {
 
   async deleteTaskImage(user: User, taskId: string): Promise<Task> {
     if (baseUrl) {
-      return request<Task>(`/tasks/${taskId}/image`, { method: "DELETE", user });
+      return request<Task>(`/tasks/${taskId}/image`, { method: "DELETE" });
     }
     return mockStore.setTaskImage(user, taskId, undefined);
   },
 
   async listProjects(user: User): Promise<Project[]> {
     if (baseUrl) {
-      return request<Project[]>("/projects", { user });
+      return request<Project[]>("/projects");
     }
     return mockStore.listProjects(user);
   },
@@ -201,7 +249,6 @@ export const api = {
       return request<Project>("/projects", {
         method: "POST",
         body: JSON.stringify(input),
-        user,
       });
     }
     return mockStore.createProject(user, input);
@@ -212,7 +259,6 @@ export const api = {
       return request<Project>(`/projects/${projectId}`, {
         method: "PATCH",
         body: JSON.stringify(input),
-        user,
       });
     }
     return mockStore.updateProject(user, projectId, input);
@@ -220,14 +266,14 @@ export const api = {
 
   async deleteProject(user: User, projectId: string): Promise<void> {
     if (baseUrl) {
-      return request<void>(`/projects/${projectId}`, { method: "DELETE", user });
+      return request<void>(`/projects/${projectId}`, { method: "DELETE" });
     }
     return mockStore.deleteProject(user, projectId);
   },
 
   async listComments(user: User, taskId: string): Promise<TaskComment[]> {
     if (baseUrl) {
-      return request<TaskComment[]>(`/tasks/${taskId}/comments`, { user });
+      return request<TaskComment[]>(`/tasks/${taskId}/comments`);
     }
     return mockStore.listComments(user, taskId);
   },
@@ -237,7 +283,6 @@ export const api = {
       return request<TaskComment>(`/tasks/${taskId}/comments`, {
         method: "POST",
         body: JSON.stringify({ body }),
-        user,
       });
     }
     return mockStore.createComment(user, taskId, body);

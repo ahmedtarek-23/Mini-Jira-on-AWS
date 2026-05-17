@@ -8,7 +8,7 @@ const router = Router();
 router.get('/', projectController.getAllProjects);
 router.get('/:projectId', projectController.getProjectById);
 router.post('/', projectController.createProject);
-router.put('/:projectId', projectController.updateProject);
+router.patch('/:projectId', projectController.updateProject); // PATCH for partial updates
 router.delete('/:projectId', projectController.deleteProject);
 
 module.exports = router;
