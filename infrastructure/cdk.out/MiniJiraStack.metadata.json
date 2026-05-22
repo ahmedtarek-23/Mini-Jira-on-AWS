@@ -1,0 +1,1482 @@
+{
+  "/MiniJiraStack": [
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/TeamsTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "TeamsTableE80F987E"
+      }
+    }
+  ],
+  "/MiniJiraStack/ProjectsTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "ProjectsTableAA0A2089"
+      }
+    }
+  ],
+  "/MiniJiraStack/TasksTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "TasksTable88911DC5"
+      }
+    }
+  ],
+  "/MiniJiraStack/CommentsTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "CommentsTableBBDBF0A8"
+      }
+    }
+  ],
+  "/MiniJiraStack/ActivityLogTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "ActivityLogTable702E49F1"
+      }
+    }
+  ],
+  "/MiniJiraStack/UsersTable": [
+    {
+      "type": "aws:cdk:hasPhysicalName",
+      "data": {
+        "Ref": "UsersTable9725E9C8"
+      }
+    }
+  ],
+  "/MiniJiraStack/Custom::S3AutoDeleteObjectsCustomResourceProvider": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-customResourceProvider",
+      "data": true
+    }
+  ],
+  "/MiniJiraStack/OriginalsBucket": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OriginalsBucket"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:179:33)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ImageResizeS3Permission": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImageResizeS3Permission"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:303:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/Ec2Profile": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Ec2Profile"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:373:36)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/SsmParameterValue:--aws--service--ami-amazon-linux-latest--al2023-ami-kernel-6.1-x86_64:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...AmazonLinuxImage.getImage in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:407:20)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/LaunchTemplate": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LaunchTemplate"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:402:32)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/TargetGroup": [
+    {
+      "type": "aws:cdk:warning",
+      "data": "When creating an empty TargetGroup, you should specify a 'targetType' (this warning may become an error in the future). [ack: @aws-cdk/aws-elbv2:targetGroupSpecifyTargetTypeForEmptyTargetGroup]",
+      "trace": [
+        "Annotations.addMessage (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:2399)",
+        "Annotations.addWarningV2 (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/annotations.js:1:1087)",
+        "WrappedClass.validateTargetGroup (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-elasticloadbalancingv2/lib/shared/base-target-group.js:1:10854)",
+        "WrappedClass.validateTargetGroup (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-elasticloadbalancingv2/lib/alb/application-target-group.js:1:17146)",
+        "Object.validate (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-elasticloadbalancingv2/lib/shared/base-target-group.js:1:8354)",
+        "/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/constructs/lib/construct.js:348:57",
+        "Array.flatMap (<anonymous>)",
+        "Node.validate (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/constructs/lib/construct.js:348:42)",
+        "/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:2:7055",
+        "visit (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:4:255)",
+        "visit (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:4:334)",
+        "visit (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:4:334)",
+        "validateTree (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:2:6990)",
+        "synthesize (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/private/synthesis.js:1:2592)",
+        "App.synth (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/stage.js:1:3594)",
+        "process.<anonymous> (/home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/core/lib/app.js:1:2166)",
+        "Object.onceWrapper (node:events:631:12)",
+        "process.emit (node:events:509:20)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/ASG": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ASG"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:438:24)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C": [
+    {
+      "type": "aws:cdk:is-custom-resource-handler-singleton",
+      "data": true
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 2
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-singleton",
+      "data": true
+    },
+    {
+      "type": "aws:cdk:is-custom-resource-handler-runtime-family",
+      "data": 2
+    }
+  ],
+  "/MiniJiraStack/FrontendUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FrontendUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:575:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ApiUrl": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ApiUrl"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:579:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/CognitoDomain": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CognitoDomain"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:583:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/UserPoolId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:587:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ClientId": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ClientId"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:591:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/BootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "BootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/CheckBootstrapVersion": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CheckBootstrapVersion"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCB9E5F0B4"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:36:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/IGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCIGWB7E252D3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:36:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/VPCGW": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCVPCGW99B986DC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:36:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/AlbSg/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AlbSg1155C1BE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:47:23)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/Ec2Sg/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Ec2SgF43886FE"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new SecurityGroup2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:54:23)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/Ec2Sg/from MiniJiraStackAlbSgA90A8C7D:3000": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Ec2SgfromMiniJiraStackAlbSgA90A8C7D3000724CABFC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:60:15)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/UserPool/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPool6BA7E5F2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPool2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:62:26)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/UserPool/PostConfirmationCognito": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolPostConfirmationCognito0E6001F8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:288:18)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/UserPoolClient/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolClient2F5918F7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPoolClient2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:84:32)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/UserPoolDomain/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UserPoolDomain5479B217"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new UserPoolDomain2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:98:32)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/TeamsTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TeamsTableE80F987E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:103:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ProjectsTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ProjectsTableAA0A2089"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:108:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/TasksTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TasksTable88911DC5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:113:28)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/CommentsTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CommentsTableBBDBF0A8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:139:31)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ActivityLogTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ActivityLogTable702E49F1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:149:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/UsersTable/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "UsersTable9725E9C8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Table2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:154:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/FrontendBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FrontendBucketEFE2E19C"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:160:32)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/MiniJiraStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/ResizedBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResizedBucket29EBF811"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:197:31)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/MiniJiraStack/DeployBucket/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeployBucket67E2C076"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:209:30)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketAutoDeleteObjects"
+      }
+    }
+  ],
+  "/MiniJiraStack/LambdaRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaRole3A44B857"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Role2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:217:28)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ImageResizeRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImageResizeRole3F2B04D2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Role2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:245:33)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/AssignmentsTopic/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AssignmentsTopic2F290ED2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Topic2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:260:34)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/AssignmentsQueue/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AssignmentsQueueF31FE296"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Queue2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:263:34)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/PostConfirmationLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "PostConfirmationLambdaC4F60401"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:279:40)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ImageResizeLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImageResizeLambda16544B7A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:289:35)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/AssignmentWorkerLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AssignmentWorkerLambdaA8E62345"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:316:40)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/DailyDigestLambda/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DailyDigestLambdaF949F258"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Function2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:325:35)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/DailyDigestRule/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DailyDigestRule15DC609B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Rule2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:336:33)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/DailyDigestRule/AllowEventRuleMiniJiraStackDailyDigestLambdaCF41D146": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DailyDigestRuleAllowEventRuleMiniJiraStackDailyDigestLambdaCF41D1464C1A69D7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:340:25)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/Ec2Role/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Ec2Role2FD9A272"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Role2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:342:25)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ALB/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ALBAEE750D2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationLoadBalancer2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:414:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/TargetGroup/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "TargetGroup3D7CD9B8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new ApplicationTargetGroup2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:420:29)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/OAI/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OAIE1EFC67F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new OriginAccessIdentity2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:456:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/CloudFront/CFDistribution": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CloudFrontCFDistribution57EFBAC6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new CloudFrontWebDistribution2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:459:32)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:493:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/Dashboard/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Dashboard9E4231ED"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Dashboard2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:504:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/HighCpuAlarm/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "HighCpuAlarm40723000"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Alarm2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:552:30)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/OverdueTasksAlarm/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "OverdueTasksAlarm7080FFA6"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Alarm2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:563:30)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/CDKMetadata/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CDKMetadata"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib, node internals...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet1Subnet325F50B2"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet1RouteTableF591E248"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet1RouteTableAssociationBFFA43B7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet1DefaultRoute19059ECD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:197 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:36:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet1/EIP": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet1EIP2D50A06D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:36:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet1/NATGateway": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet1NATGatewayEEDEB5A1"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:36:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet2Subnet2B2DFF71"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet2RouteTable55DAB1BB"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet2RouteTableAssociation0849466B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:257 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/publicSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCpublicSubnet2DefaultRoute9ED4D6BC"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:197 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...new Vpc2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:36:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/privateSubnet1/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCprivateSubnet1SubnetE522290D"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/privateSubnet1/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCprivateSubnet1RouteTable41566AF9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/privateSubnet1/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCprivateSubnet1RouteTableAssociation43FE0C59"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/privateSubnet1/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCprivateSubnet1DefaultRoute68B79172"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:36:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/privateSubnet2/Subnet": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCprivateSubnet2Subnet2F4D9530"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/privateSubnet2/RouteTable": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCprivateSubnet2RouteTableBBE8BB2B"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/privateSubnet2/RouteTableAssociation": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCprivateSubnet2RouteTableAssociation45BBC356"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        ".../home/amr/giu/cloud/mini-jira/infrastructure/node_modules/aws-cdk-lib/aws-ec2/lib/vpc.js:1:260 in aws-cdk-lib...",
+        "Array.forEach (:)",
+        "...aws-cdk-lib..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/VPC/privateSubnet2/DefaultRoute": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "VPCprivateSubnet2DefaultRouteD808B206"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Vpc2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:36:21)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/FrontendBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FrontendBucketPolicy1DFF75D9"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/MiniJiraStack/FrontendBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "FrontendBucketAutoDeleteObjectsCustomResourceDB860B32"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/ResizedBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResizedBucketPolicy093242EF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/MiniJiraStack/ResizedBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ResizedBucketAutoDeleteObjectsCustomResource9926BB49"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/DeployBucket/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeployBucketPolicyCED076FF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new Bucket2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:209:30)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    },
+    {
+      "type": "aws:cdk:analytics:mixin",
+      "data": {
+        "mixin": "aws-cdk-lib.aws_s3.mixins.BucketPolicyStatements"
+      }
+    }
+  ],
+  "/MiniJiraStack/DeployBucket/AutoDeleteObjectsCustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeployBucketAutoDeleteObjectsCustomResourceC751D9D5"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/LambdaRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "LambdaRoleDefaultPolicy75625A82"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:226:20)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ImageResizeRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ImageResizeRoleDefaultPolicy1A611D0A"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:252:25)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/AssignmentsTopic/amr.hediwy@gmail.com/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AssignmentsTopicamrhediwygmailcomF91081D8"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addSubscription in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:267:26)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/AssignmentsQueue/Policy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AssignmentsQueuePolicy97AF60FD"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addSubscription in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:266:26)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/AssignmentsQueue/MiniJiraStackAssignmentsTopicE9BF75AF/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AssignmentsQueueMiniJiraStackAssignmentsTopicE9BF75AFF97D28C3"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addSubscription in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:266:26)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/AssignmentWorkerLambda/SqsEventSource:MiniJiraStackAssignmentsQueue772260B7/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "AssignmentWorkerLambdaSqsEventSourceMiniJiraStackAssignmentsQueue772260B72C78AD06"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.addEventSource in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:334:32)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/Ec2Role/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "Ec2RoleDefaultPolicy99BC91F7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:349:17)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/ALB/HttpListener/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "ALBHttpListener04CE8CD0"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...WrappedClass.<anonymous> in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:433:13)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/DeployFrontend/AwsCliLayer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeployFrontendAwsCliLayerD774ED8F"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:493:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/DeployFrontend/CustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeployFrontendCustomResource3E02C3B7"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:493:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ],
+  "/MiniJiraStack/DeployBackend/AwsCliLayer/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeployBackendAwsCliLayerF1F7665E"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:499:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/DeployBackend/CustomResource/Default": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "DeployBackendCustomResource98C10F89"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...new BucketDeployment2 in aws-cdk-lib...",
+        "new MiniJiraStack (file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/lib/mini-jira-stack.js:499:9)",
+        "file:///home/amr/giu/cloud/mini-jira/infrastructure/dist/bin/app.js:5 (:)",
+        "...node internals..."
+      ]
+    }
+  ],
+  "/MiniJiraStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource": [
+    {
+      "type": "aws:cdk:logicalId",
+      "data": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF"
+    },
+    {
+      "type": "aws:cdk:creationStack",
+      "data": [
+        "...aws-cdk-lib...",
+        "(no user code in 10 frames, use --stack-trace-limit to capture more)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "app": "node --experimental-specifier-resolution=node ./dist/bin/app.js",
+  "watch": {
+    "include": ["bin/**/*", "lib/**/*"],
+    "exclude": ["node_modules", "dist"]
+  },
+  "context": {
+    "@aws-cdk/aws-s3:notificationsUseExistingBucket": true
+  }
+}

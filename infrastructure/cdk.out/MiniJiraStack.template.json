@@ -1,0 +1,2810 @@
+{
+ "Resources": {
+  "VPCB9E5F0B4": {
+   "Type": "AWS::EC2::VPC",
+   "Properties": {
+    "CidrBlock": "10.0.0.0/16",
+    "EnableDnsHostnames": true,
+    "EnableDnsSupport": true,
+    "InstanceTenancy": "default",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "minijira-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/Resource"
+   }
+  },
+  "VPCpublicSubnet1Subnet325F50B2": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.0.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/publicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet1/Subnet"
+   }
+  },
+  "VPCpublicSubnet1RouteTableF591E248": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/publicSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet1/RouteTable"
+   }
+  },
+  "VPCpublicSubnet1RouteTableAssociationBFFA43B7": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VPCpublicSubnet1RouteTableF591E248"
+    },
+    "SubnetId": {
+     "Ref": "VPCpublicSubnet1Subnet325F50B2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet1/RouteTableAssociation"
+   }
+  },
+  "VPCpublicSubnet1DefaultRoute19059ECD": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VPCIGWB7E252D3"
+    },
+    "RouteTableId": {
+     "Ref": "VPCpublicSubnet1RouteTableF591E248"
+    }
+   },
+   "DependsOn": [
+    "VPCVPCGW99B986DC"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet1/DefaultRoute"
+   }
+  },
+  "VPCpublicSubnet1EIP2D50A06D": {
+   "Type": "AWS::EC2::EIP",
+   "Properties": {
+    "Domain": "vpc",
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/publicSubnet1"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet1/EIP"
+   }
+  },
+  "VPCpublicSubnet1NATGatewayEEDEB5A1": {
+   "Type": "AWS::EC2::NatGateway",
+   "Properties": {
+    "AllocationId": {
+     "Fn::GetAtt": [
+      "VPCpublicSubnet1EIP2D50A06D",
+      "AllocationId"
+     ]
+    },
+    "SubnetId": {
+     "Ref": "VPCpublicSubnet1Subnet325F50B2"
+    },
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/publicSubnet1"
+     }
+    ]
+   },
+   "DependsOn": [
+    "VPCpublicSubnet1DefaultRoute19059ECD",
+    "VPCpublicSubnet1RouteTableAssociationBFFA43B7"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet1/NATGateway"
+   }
+  },
+  "VPCpublicSubnet2Subnet2B2DFF71": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.1.0/24",
+    "MapPublicIpOnLaunch": true,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "public"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Public"
+     },
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/publicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet2/Subnet"
+   }
+  },
+  "VPCpublicSubnet2RouteTable55DAB1BB": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/publicSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet2/RouteTable"
+   }
+  },
+  "VPCpublicSubnet2RouteTableAssociation0849466B": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VPCpublicSubnet2RouteTable55DAB1BB"
+    },
+    "SubnetId": {
+     "Ref": "VPCpublicSubnet2Subnet2B2DFF71"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet2/RouteTableAssociation"
+   }
+  },
+  "VPCpublicSubnet2DefaultRoute9ED4D6BC": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "GatewayId": {
+     "Ref": "VPCIGWB7E252D3"
+    },
+    "RouteTableId": {
+     "Ref": "VPCpublicSubnet2RouteTable55DAB1BB"
+    }
+   },
+   "DependsOn": [
+    "VPCVPCGW99B986DC"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/publicSubnet2/DefaultRoute"
+   }
+  },
+  "VPCprivateSubnet1SubnetE522290D": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1a",
+    "CidrBlock": "10.0.2.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/privateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/privateSubnet1/Subnet"
+   }
+  },
+  "VPCprivateSubnet1RouteTable41566AF9": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/privateSubnet1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/privateSubnet1/RouteTable"
+   }
+  },
+  "VPCprivateSubnet1RouteTableAssociation43FE0C59": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VPCprivateSubnet1RouteTable41566AF9"
+    },
+    "SubnetId": {
+     "Ref": "VPCprivateSubnet1SubnetE522290D"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/privateSubnet1/RouteTableAssociation"
+   }
+  },
+  "VPCprivateSubnet1DefaultRoute68B79172": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VPCpublicSubnet1NATGatewayEEDEB5A1"
+    },
+    "RouteTableId": {
+     "Ref": "VPCprivateSubnet1RouteTable41566AF9"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/privateSubnet1/DefaultRoute"
+   }
+  },
+  "VPCprivateSubnet2Subnet2F4D9530": {
+   "Type": "AWS::EC2::Subnet",
+   "Properties": {
+    "AvailabilityZone": "us-east-1b",
+    "CidrBlock": "10.0.3.0/24",
+    "MapPublicIpOnLaunch": false,
+    "Tags": [
+     {
+      "Key": "aws-cdk:subnet-name",
+      "Value": "private"
+     },
+     {
+      "Key": "aws-cdk:subnet-type",
+      "Value": "Private"
+     },
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/privateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/privateSubnet2/Subnet"
+   }
+  },
+  "VPCprivateSubnet2RouteTableBBE8BB2B": {
+   "Type": "AWS::EC2::RouteTable",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "MiniJiraStack/VPC/privateSubnet2"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/privateSubnet2/RouteTable"
+   }
+  },
+  "VPCprivateSubnet2RouteTableAssociation45BBC356": {
+   "Type": "AWS::EC2::SubnetRouteTableAssociation",
+   "Properties": {
+    "RouteTableId": {
+     "Ref": "VPCprivateSubnet2RouteTableBBE8BB2B"
+    },
+    "SubnetId": {
+     "Ref": "VPCprivateSubnet2Subnet2F4D9530"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/privateSubnet2/RouteTableAssociation"
+   }
+  },
+  "VPCprivateSubnet2DefaultRouteD808B206": {
+   "Type": "AWS::EC2::Route",
+   "Properties": {
+    "DestinationCidrBlock": "0.0.0.0/0",
+    "NatGatewayId": {
+     "Ref": "VPCpublicSubnet1NATGatewayEEDEB5A1"
+    },
+    "RouteTableId": {
+     "Ref": "VPCprivateSubnet2RouteTableBBE8BB2B"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/privateSubnet2/DefaultRoute"
+   }
+  },
+  "VPCIGWB7E252D3": {
+   "Type": "AWS::EC2::InternetGateway",
+   "Properties": {
+    "Tags": [
+     {
+      "Key": "Name",
+      "Value": "minijira-vpc"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/IGW"
+   }
+  },
+  "VPCVPCGW99B986DC": {
+   "Type": "AWS::EC2::VPCGatewayAttachment",
+   "Properties": {
+    "InternetGatewayId": {
+     "Ref": "VPCIGWB7E252D3"
+    },
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/VPC/VPCGW"
+   }
+  },
+  "AlbSg1155C1BE": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "ALB security group",
+    "GroupName": "minijira-alb-sg",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "SecurityGroupIngress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow HTTP",
+      "FromPort": 80,
+      "IpProtocol": "tcp",
+      "ToPort": 80
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/AlbSg/Resource"
+   }
+  },
+  "Ec2SgF43886FE": {
+   "Type": "AWS::EC2::SecurityGroup",
+   "Properties": {
+    "GroupDescription": "EC2 security group",
+    "GroupName": "minijira-ec2-sg",
+    "SecurityGroupEgress": [
+     {
+      "CidrIp": "0.0.0.0/0",
+      "Description": "Allow all outbound traffic by default",
+      "IpProtocol": "-1"
+     }
+    ],
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Ec2Sg/Resource"
+   }
+  },
+  "Ec2SgfromMiniJiraStackAlbSgA90A8C7D3000724CABFC": {
+   "Type": "AWS::EC2::SecurityGroupIngress",
+   "Properties": {
+    "Description": "Allow from ALB",
+    "FromPort": 3000,
+    "GroupId": {
+     "Fn::GetAtt": [
+      "Ec2SgF43886FE",
+      "GroupId"
+     ]
+    },
+    "IpProtocol": "tcp",
+    "SourceSecurityGroupId": {
+     "Fn::GetAtt": [
+      "AlbSg1155C1BE",
+      "GroupId"
+     ]
+    },
+    "ToPort": 3000
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Ec2Sg/from MiniJiraStackAlbSgA90A8C7D:3000"
+   }
+  },
+  "UserPool6BA7E5F2": {
+   "Type": "AWS::Cognito::UserPool",
+   "Properties": {
+    "AccountRecoverySetting": {
+     "RecoveryMechanisms": [
+      {
+       "Name": "verified_email",
+       "Priority": 1
+      }
+     ]
+    },
+    "AdminCreateUserConfig": {
+     "AllowAdminCreateUserOnly": false
+    },
+    "AutoVerifiedAttributes": [
+     "email"
+    ],
+    "EmailVerificationMessage": "The verification code to your new account is {####}",
+    "EmailVerificationSubject": "Verify your new account",
+    "LambdaConfig": {
+     "PostConfirmation": {
+      "Fn::GetAtt": [
+       "PostConfirmationLambdaC4F60401",
+       "Arn"
+      ]
+     }
+    },
+    "Policies": {
+     "PasswordPolicy": {
+      "MinimumLength": 8,
+      "RequireLowercase": true,
+      "RequireNumbers": true,
+      "RequireSymbols": false,
+      "RequireUppercase": true
+     }
+    },
+    "Schema": [
+     {
+      "Mutable": true,
+      "Name": "email",
+      "Required": true
+     },
+     {
+      "Mutable": true,
+      "Name": "given_name",
+      "Required": true
+     },
+     {
+      "Mutable": true,
+      "Name": "family_name",
+      "Required": true
+     },
+     {
+      "AttributeDataType": "String",
+      "Mutable": true,
+      "Name": "role"
+     },
+     {
+      "AttributeDataType": "String",
+      "Mutable": true,
+      "Name": "teamId"
+     }
+    ],
+    "SmsVerificationMessage": "The verification code to your new account is {####}",
+    "UserPoolName": "minijira-users",
+    "UsernameAttributes": [
+     "email"
+    ],
+    "VerificationMessageTemplate": {
+     "DefaultEmailOption": "CONFIRM_WITH_CODE",
+     "EmailMessage": "The verification code to your new account is {####}",
+     "EmailSubject": "Verify your new account",
+     "SmsMessage": "The verification code to your new account is {####}"
+    }
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/UserPool/Resource"
+   }
+  },
+  "UserPoolPostConfirmationCognito0E6001F8": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "PostConfirmationLambdaC4F60401",
+      "Arn"
+     ]
+    },
+    "Principal": "cognito-idp.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "UserPool6BA7E5F2",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/UserPool/PostConfirmationCognito"
+   }
+  },
+  "UserPoolClient2F5918F7": {
+   "Type": "AWS::Cognito::UserPoolClient",
+   "Properties": {
+    "AllowedOAuthFlows": [
+     "implicit",
+     "code"
+    ],
+    "AllowedOAuthFlowsUserPoolClient": true,
+    "AllowedOAuthScopes": [
+     "openid",
+     "email",
+     "profile"
+    ],
+    "CallbackURLs": [
+     "https://d1f71pped3yvzi.cloudfront.net/callback"
+    ],
+    "ExplicitAuthFlows": [
+     "ALLOW_USER_PASSWORD_AUTH",
+     "ALLOW_USER_SRP_AUTH",
+     "ALLOW_REFRESH_TOKEN_AUTH"
+    ],
+    "GenerateSecret": false,
+    "LogoutURLs": [
+     "https://d1f71pped3yvzi.cloudfront.net/"
+    ],
+    "ReadAttributes": [
+     "custom:role",
+     "custom:teamId",
+     "email",
+     "email_verified",
+     "name"
+    ],
+    "SupportedIdentityProviders": [
+     "COGNITO"
+    ],
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/UserPoolClient/Resource"
+   }
+  },
+  "UserPoolDomain5479B217": {
+   "Type": "AWS::Cognito::UserPoolDomain",
+   "Properties": {
+    "Domain": "minijira-auth",
+    "UserPoolId": {
+     "Ref": "UserPool6BA7E5F2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/UserPoolDomain/Resource"
+   }
+  },
+  "TeamsTableE80F987E": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "teamId",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "teamId",
+      "KeyType": "HASH"
+     }
+    ],
+    "TableName": "Teams"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/TeamsTable/Resource"
+   }
+  },
+  "ProjectsTableAA0A2089": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "projectId",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "projectId",
+      "KeyType": "HASH"
+     }
+    ],
+    "TableName": "Projects"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ProjectsTable/Resource"
+   }
+  },
+  "TasksTable88911DC5": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "taskId",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "createdAt",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "teamId",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "status",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "assignee",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "assigneeId",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "TeamIdIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "teamId",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "createdAt",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "StatusIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "status",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "createdAt",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "AssigneeIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "assignee",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "createdAt",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     },
+     {
+      "IndexName": "AssigneeIdIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "assigneeId",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "createdAt",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "taskId",
+      "KeyType": "HASH"
+     },
+     {
+      "AttributeName": "createdAt",
+      "KeyType": "RANGE"
+     }
+    ],
+    "TableName": "Tasks"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/TasksTable/Resource"
+   }
+  },
+  "CommentsTableBBDBF0A8": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "commentId",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "taskId",
+      "AttributeType": "S"
+     },
+     {
+      "AttributeName": "createdAt",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "GlobalSecondaryIndexes": [
+     {
+      "IndexName": "TaskIdIndex",
+      "KeySchema": [
+       {
+        "AttributeName": "taskId",
+        "KeyType": "HASH"
+       },
+       {
+        "AttributeName": "createdAt",
+        "KeyType": "RANGE"
+       }
+      ],
+      "Projection": {
+       "ProjectionType": "ALL"
+      }
+     }
+    ],
+    "KeySchema": [
+     {
+      "AttributeName": "commentId",
+      "KeyType": "HASH"
+     }
+    ],
+    "TableName": "Comments"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/CommentsTable/Resource"
+   }
+  },
+  "ActivityLogTable702E49F1": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "logId",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "logId",
+      "KeyType": "HASH"
+     }
+    ],
+    "TableName": "ActivityLog"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ActivityLogTable/Resource"
+   }
+  },
+  "UsersTable9725E9C8": {
+   "Type": "AWS::DynamoDB::Table",
+   "Properties": {
+    "AttributeDefinitions": [
+     {
+      "AttributeName": "userId",
+      "AttributeType": "S"
+     }
+    ],
+    "BillingMode": "PAY_PER_REQUEST",
+    "KeySchema": [
+     {
+      "AttributeName": "userId",
+      "KeyType": "HASH"
+     }
+    ],
+    "TableName": "Users"
+   },
+   "UpdateReplacePolicy": "Retain",
+   "DeletionPolicy": "Retain",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/UsersTable/Resource"
+   }
+  },
+  "FrontendBucketEFE2E19C": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "minijira-frontend-irastack",
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": false,
+     "BlockPublicPolicy": false,
+     "IgnorePublicAcls": false,
+     "RestrictPublicBuckets": false
+    },
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     },
+     {
+      "Key": "aws-cdk:cr-owned:a1b6f904",
+      "Value": "true"
+     }
+    ],
+    "WebsiteConfiguration": {
+     "ErrorDocument": "index.html",
+     "IndexDocument": "index.html"
+    }
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/FrontendBucket/Resource"
+   }
+  },
+  "FrontendBucketPolicy1DFF75D9": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "FrontendBucketEFE2E19C"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:GetObject",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "FrontendBucketEFE2E19C",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:PutBucketPolicy",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "FrontendBucketEFE2E19C",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "FrontendBucketEFE2E19C",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": "s3:GetObject",
+       "Effect": "Allow",
+       "Principal": {
+        "CanonicalUser": {
+         "Fn::GetAtt": [
+          "OAIE1EFC67F",
+          "S3CanonicalUserId"
+         ]
+        }
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "FrontendBucketEFE2E19C",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/FrontendBucket/Policy/Resource"
+   }
+  },
+  "FrontendBucketAutoDeleteObjectsCustomResourceDB860B32": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "FrontendBucketEFE2E19C"
+    }
+   },
+   "DependsOn": [
+    "FrontendBucketPolicy1DFF75D9"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/FrontendBucket/AutoDeleteObjectsCustomResource/Default"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Version": "2012-10-17",
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ]
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Sub": "arn:${AWS::Partition}:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Role"
+   }
+  },
+  "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-362612349549-us-east-1",
+     "S3Key": "faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6.zip"
+    },
+    "Timeout": 900,
+    "MemorySize": 128,
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Description": {
+     "Fn::Join": [
+      "",
+      [
+       "Lambda function for auto-deleting objects in ",
+       {
+        "Ref": "FrontendBucketEFE2E19C"
+       },
+       " S3 bucket."
+      ]
+     ]
+    }
+   },
+   "DependsOn": [
+    "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Custom::S3AutoDeleteObjectsCustomResourceProvider/Handler",
+    "aws:asset:path": "asset.faa95a81ae7d7373f3e1f242268f904eb748d8d0fdd306e8a6fe515a1905a7d6",
+    "aws:asset:property": "Code"
+   }
+  },
+  "OriginalsBucket": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "minijira-originals-irastack",
+    "CorsConfiguration": {
+     "CorsRules": [
+      {
+       "AllowedHeaders": [
+        "*"
+       ],
+       "AllowedMethods": [
+        "PUT",
+        "POST",
+        "GET"
+       ],
+       "AllowedOrigins": [
+        "*"
+       ],
+       "MaxAge": 3000
+      }
+     ]
+    },
+    "NotificationConfiguration": {
+     "LambdaConfigurations": [
+      {
+       "Event": "s3:ObjectCreated:*",
+       "Function": {
+        "Fn::GetAtt": [
+         "ImageResizeLambda16544B7A",
+         "Arn"
+        ]
+       }
+      }
+     ]
+    },
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": false,
+     "BlockPublicPolicy": false,
+     "IgnorePublicAcls": false,
+     "RestrictPublicBuckets": false
+    },
+    "VersioningConfiguration": {
+     "Status": "Enabled"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/OriginalsBucket"
+   }
+  },
+  "ResizedBucket29EBF811": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "minijira-resized-irastack",
+    "PublicAccessBlockConfiguration": {
+     "BlockPublicAcls": false,
+     "BlockPublicPolicy": false,
+     "IgnorePublicAcls": false,
+     "RestrictPublicBuckets": false
+    },
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ResizedBucket/Resource"
+   }
+  },
+  "ResizedBucketPolicy093242EF": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "ResizedBucket29EBF811"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "s3:GetObject",
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": "*"
+       },
+       "Resource": {
+        "Fn::Join": [
+         "",
+         [
+          {
+           "Fn::GetAtt": [
+            "ResizedBucket29EBF811",
+            "Arn"
+           ]
+          },
+          "/*"
+         ]
+        ]
+       }
+      },
+      {
+       "Action": [
+        "s3:PutBucketPolicy",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "ResizedBucket29EBF811",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "ResizedBucket29EBF811",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ResizedBucket/Policy/Resource"
+   }
+  },
+  "ResizedBucketAutoDeleteObjectsCustomResource9926BB49": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "ResizedBucket29EBF811"
+    }
+   },
+   "DependsOn": [
+    "ResizedBucketPolicy093242EF"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ResizedBucket/AutoDeleteObjectsCustomResource/Default"
+   }
+  },
+  "DeployBucket67E2C076": {
+   "Type": "AWS::S3::Bucket",
+   "Properties": {
+    "BucketName": "minijira-deploy-irastack",
+    "Tags": [
+     {
+      "Key": "aws-cdk:auto-delete-objects",
+      "Value": "true"
+     },
+     {
+      "Key": "aws-cdk:cr-owned:19df7337",
+      "Value": "true"
+     }
+    ]
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DeployBucket/Resource"
+   }
+  },
+  "DeployBucketPolicyCED076FF": {
+   "Type": "AWS::S3::BucketPolicy",
+   "Properties": {
+    "Bucket": {
+     "Ref": "DeployBucket67E2C076"
+    },
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:PutBucketPolicy",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*"
+       ],
+       "Effect": "Allow",
+       "Principal": {
+        "AWS": {
+         "Fn::GetAtt": [
+          "CustomS3AutoDeleteObjectsCustomResourceProviderRole3B1BD092",
+          "Arn"
+         ]
+        }
+       },
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "DeployBucket67E2C076",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "DeployBucket67E2C076",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DeployBucket/Policy/Resource"
+   }
+  },
+  "DeployBucketAutoDeleteObjectsCustomResourceC751D9D5": {
+   "Type": "Custom::S3AutoDeleteObjects",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomS3AutoDeleteObjectsCustomResourceProviderHandler9D90184F",
+      "Arn"
+     ]
+    },
+    "BucketName": {
+     "Ref": "DeployBucket67E2C076"
+    }
+   },
+   "DependsOn": [
+    "DeployBucketPolicyCED076FF"
+   ],
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DeployBucket/AutoDeleteObjectsCustomResource/Default"
+   }
+  },
+  "LambdaRole3A44B857": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "RoleName": "minijira-lambda-role"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/LambdaRole/Resource"
+   }
+  },
+  "LambdaRoleDefaultPolicy75625A82": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Teams",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Projects",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Tasks",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Comments",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/ActivityLog",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Users",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Tasks/*"
+       ]
+      },
+      {
+       "Action": "cloudwatch:PutMetricData",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "cognito-idp:AdminGetUser",
+        "cognito-idp:ListUsers"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:cognito-idp:us-east-1:362612349549:userpool/*"
+      },
+      {
+       "Action": [
+        "sns:Publish",
+        "sns:Subscribe"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:sns:us-east-1:362612349549:minijira-assignments"
+      },
+      {
+       "Action": [
+        "sqs:ReceiveMessage",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:sqs:us-east-1:362612349549:minijira-assignments"
+      },
+      {
+       "Action": [
+        "sqs:ReceiveMessage",
+        "sqs:ChangeMessageVisibility",
+        "sqs:GetQueueUrl",
+        "sqs:DeleteMessage",
+        "sqs:GetQueueAttributes"
+       ],
+       "Effect": "Allow",
+       "Resource": {
+        "Fn::GetAtt": [
+         "AssignmentsQueueF31FE296",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "LambdaRoleDefaultPolicy75625A82",
+    "Roles": [
+     {
+      "Ref": "LambdaRole3A44B857"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/LambdaRole/DefaultPolicy/Resource"
+   }
+  },
+  "ImageResizeRole3F2B04D2": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ],
+    "RoleName": "minijira-image-resize-role"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ImageResizeRole/Resource"
+   }
+  },
+  "ImageResizeRoleDefaultPolicy1A611D0A": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetObject",
+        "s3:PutObject",
+        "s3:DeleteObject"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:s3:::minijira-*",
+        "arn:aws:s3:::minijira-*/*"
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "ImageResizeRoleDefaultPolicy1A611D0A",
+    "Roles": [
+     {
+      "Ref": "ImageResizeRole3F2B04D2"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ImageResizeRole/DefaultPolicy/Resource"
+   }
+  },
+  "AssignmentsTopic2F290ED2": {
+   "Type": "AWS::SNS::Topic",
+   "Properties": {
+    "TopicName": "minijira-assignments"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/AssignmentsTopic/Resource"
+   }
+  },
+  "AssignmentsTopicamrhediwygmailcomF91081D8": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Endpoint": "amr.hediwy@gmail.com",
+    "Protocol": "email",
+    "TopicArn": {
+     "Ref": "AssignmentsTopic2F290ED2"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/AssignmentsTopic/amr.hediwy@gmail.com/Resource"
+   }
+  },
+  "AssignmentsQueueF31FE296": {
+   "Type": "AWS::SQS::Queue",
+   "Properties": {
+    "QueueName": "minijira-assignments"
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/AssignmentsQueue/Resource"
+   }
+  },
+  "AssignmentsQueuePolicy97AF60FD": {
+   "Type": "AWS::SQS::QueuePolicy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sqs:SendMessage",
+       "Condition": {
+        "ArnEquals": {
+         "aws:SourceArn": {
+          "Ref": "AssignmentsTopic2F290ED2"
+         }
+        }
+       },
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "sns.amazonaws.com"
+       },
+       "Resource": {
+        "Fn::GetAtt": [
+         "AssignmentsQueueF31FE296",
+         "Arn"
+        ]
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "Queues": [
+     {
+      "Ref": "AssignmentsQueueF31FE296"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/AssignmentsQueue/Policy/Resource"
+   }
+  },
+  "AssignmentsQueueMiniJiraStackAssignmentsTopicE9BF75AFF97D28C3": {
+   "Type": "AWS::SNS::Subscription",
+   "Properties": {
+    "Endpoint": {
+     "Fn::GetAtt": [
+      "AssignmentsQueueF31FE296",
+      "Arn"
+     ]
+    },
+    "Protocol": "sqs",
+    "TopicArn": {
+     "Ref": "AssignmentsTopic2F290ED2"
+    }
+   },
+   "DependsOn": [
+    "AssignmentsQueuePolicy97AF60FD"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/AssignmentsQueue/MiniJiraStackAssignmentsTopicE9BF75AF/Resource"
+   }
+  },
+  "PostConfirmationLambdaC4F60401": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-362612349549-us-east-1",
+     "S3Key": "881d13b74fc2d021f2c698ffeae4bc3f95e93ad7f1a8ec666125770f823a0ef8.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "TABLE_USERS": "Users",
+      "SNS_TOPIC_ARN": "arn:aws:sns:us-east-1:362612349549:minijira-assignments"
+     }
+    },
+    "FunctionName": "minijira-post-confirmation",
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "LambdaRole3A44B857",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 10
+   },
+   "DependsOn": [
+    "LambdaRoleDefaultPolicy75625A82",
+    "LambdaRole3A44B857"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/PostConfirmationLambda/Resource",
+    "aws:asset:path": "asset.881d13b74fc2d021f2c698ffeae4bc3f95e93ad7f1a8ec666125770f823a0ef8.zip",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "ImageResizeLambda16544B7A": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-362612349549-us-east-1",
+     "S3Key": "7e77f8436a8f508c056b52eac5e70479cbd2a84afbb1bdff673642a805d530c1.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "ORIGINALS_BUCKET": "minijira-originals-irastack",
+      "RESIZED_BUCKET": "minijira-resized-irastack"
+     }
+    },
+    "FunctionName": "minijira-image-resize",
+    "Handler": "index.handler",
+    "MemorySize": 1024,
+    "Role": {
+     "Fn::GetAtt": [
+      "ImageResizeRole3F2B04D2",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "ImageResizeRoleDefaultPolicy1A611D0A",
+    "ImageResizeRole3F2B04D2"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ImageResizeLambda/Resource",
+    "aws:asset:path": "asset.7e77f8436a8f508c056b52eac5e70479cbd2a84afbb1bdff673642a805d530c1.zip",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "ImageResizeS3Permission": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "ImageResizeLambda16544B7A",
+      "Arn"
+     ]
+    },
+    "Principal": "s3.amazonaws.com",
+    "SourceArn": "arn:aws:s3:::minijira-originals-irastack"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ImageResizeS3Permission"
+   }
+  },
+  "AssignmentWorkerLambdaA8E62345": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-362612349549-us-east-1",
+     "S3Key": "5ef747731dd488a70a3c07a6604a630f41ec7b8039acd6a125cda5333cea34e3.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "TABLE_ACTIVITY_LOG": "ActivityLog"
+     }
+    },
+    "FunctionName": "minijira-assignment-worker",
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "LambdaRole3A44B857",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 10
+   },
+   "DependsOn": [
+    "LambdaRoleDefaultPolicy75625A82",
+    "LambdaRole3A44B857"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/AssignmentWorkerLambda/Resource",
+    "aws:asset:path": "asset.5ef747731dd488a70a3c07a6604a630f41ec7b8039acd6a125cda5333cea34e3.zip",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "AssignmentWorkerLambdaSqsEventSourceMiniJiraStackAssignmentsQueue772260B72C78AD06": {
+   "Type": "AWS::Lambda::EventSourceMapping",
+   "Properties": {
+    "EventSourceArn": {
+     "Fn::GetAtt": [
+      "AssignmentsQueueF31FE296",
+      "Arn"
+     ]
+    },
+    "FunctionName": {
+     "Ref": "AssignmentWorkerLambdaA8E62345"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/AssignmentWorkerLambda/SqsEventSource:MiniJiraStackAssignmentsQueue772260B7/Resource"
+   }
+  },
+  "DailyDigestLambdaF949F258": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-362612349549-us-east-1",
+     "S3Key": "98c78ef991c0019050199a1e1ec916ff4f09eff6f89a5b4660b5bd17d4af09b6.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "TABLE_TASKS": "Tasks",
+      "SNS_TOPIC_ARN": "arn:aws:sns:us-east-1:362612349549:minijira-assignments"
+     }
+    },
+    "FunctionName": "minijira-daily-digest",
+    "Handler": "index.handler",
+    "Role": {
+     "Fn::GetAtt": [
+      "LambdaRole3A44B857",
+      "Arn"
+     ]
+    },
+    "Runtime": "nodejs22.x",
+    "Timeout": 30
+   },
+   "DependsOn": [
+    "LambdaRoleDefaultPolicy75625A82",
+    "LambdaRole3A44B857"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DailyDigestLambda/Resource",
+    "aws:asset:path": "asset.98c78ef991c0019050199a1e1ec916ff4f09eff6f89a5b4660b5bd17d4af09b6.zip",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "DailyDigestRule15DC609B": {
+   "Type": "AWS::Events::Rule",
+   "Properties": {
+    "Name": "minijira-daily-digest-rule",
+    "ScheduleExpression": "cron(0 9 * * ? *)",
+    "State": "ENABLED",
+    "Targets": [
+     {
+      "Arn": {
+       "Fn::GetAtt": [
+        "DailyDigestLambdaF949F258",
+        "Arn"
+       ]
+      },
+      "Id": "Target0"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DailyDigestRule/Resource"
+   }
+  },
+  "DailyDigestRuleAllowEventRuleMiniJiraStackDailyDigestLambdaCF41D1464C1A69D7": {
+   "Type": "AWS::Lambda::Permission",
+   "Properties": {
+    "Action": "lambda:InvokeFunction",
+    "FunctionName": {
+     "Fn::GetAtt": [
+      "DailyDigestLambdaF949F258",
+      "Arn"
+     ]
+    },
+    "Principal": "events.amazonaws.com",
+    "SourceArn": {
+     "Fn::GetAtt": [
+      "DailyDigestRule15DC609B",
+      "Arn"
+     ]
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DailyDigestRule/AllowEventRuleMiniJiraStackDailyDigestLambdaCF41D146"
+   }
+  },
+  "Ec2Role2FD9A272": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "ec2.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/AmazonSSMManagedInstanceCore"
+       ]
+      ]
+     }
+    ],
+    "RoleName": "minijira-ec2-role"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Ec2Role/Resource"
+   }
+  },
+  "Ec2RoleDefaultPolicy99BC91F7": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:ListBucket",
+        "s3:GetObject"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:s3:::minijira-deploy-irastack",
+        "arn:aws:s3:::minijira-deploy-irastack/*"
+       ]
+      },
+      {
+       "Action": [
+        "dynamodb:BatchGetItem",
+        "dynamodb:BatchWriteItem",
+        "dynamodb:DeleteItem",
+        "dynamodb:GetItem",
+        "dynamodb:PutItem",
+        "dynamodb:Query",
+        "dynamodb:Scan",
+        "dynamodb:UpdateItem"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Teams",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Projects",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Tasks",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Comments",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/ActivityLog",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Users",
+        "arn:aws:dynamodb:us-east-1:362612349549:table/Tasks/*"
+       ]
+      },
+      {
+       "Action": [
+        "sns:Publish",
+        "sns:Subscribe"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:sns:us-east-1:362612349549:minijira-assignments"
+      },
+      {
+       "Action": "cloudwatch:PutMetricData",
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "cognito-idp:AdminGetUser",
+        "cognito-idp:AdminUpdateUserAttributes"
+       ],
+       "Effect": "Allow",
+       "Resource": "arn:aws:cognito-idp:us-east-1:362612349549:userpool/*"
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "Ec2RoleDefaultPolicy99BC91F7",
+    "Roles": [
+     {
+      "Ref": "Ec2Role2FD9A272"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Ec2Role/DefaultPolicy/Resource"
+   }
+  },
+  "Ec2Profile": {
+   "Type": "AWS::IAM::InstanceProfile",
+   "Properties": {
+    "InstanceProfileName": "minijira-ec2-profile",
+    "Roles": [
+     {
+      "Ref": "Ec2Role2FD9A272"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Ec2Profile"
+   }
+  },
+  "LaunchTemplate": {
+   "Type": "AWS::EC2::LaunchTemplate",
+   "Properties": {
+    "LaunchTemplateData": {
+     "IamInstanceProfile": {
+      "Arn": {
+       "Fn::GetAtt": [
+        "Ec2Profile",
+        "Arn"
+       ]
+      }
+     },
+     "ImageId": {
+      "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter"
+     },
+     "InstanceType": "t3.micro",
+     "SecurityGroupIds": [
+      {
+       "Fn::GetAtt": [
+        "Ec2SgF43886FE",
+        "GroupId"
+       ]
+      }
+     ],
+     "UserData": {
+      "Fn::Base64": {
+       "Fn::Join": [
+        "",
+        [
+         "#!/bin/bash\nset -e\nexec > >(tee /var/log/user-data.log) 2>&1\ndnf install -y nodejs aws-cli\nmkdir -p /opt/app && cd /opt/app\naws s3 sync s3://minijira-deploy-irastack/ .\nnpm install --production\nexport PORT=3000\nexport AWS_REGION=us-east-1\nexport COGNITO_USER_POOL_ID=",
+         {
+          "Ref": "UserPool6BA7E5F2"
+         },
+         "\nexport COGNITO_CLIENT_ID=",
+         {
+          "Ref": "UserPoolClient2F5918F7"
+         },
+         "\nexport TABLE_TEAMS=Teams\nexport TABLE_PROJECTS=Projects\nexport TABLE_TASKS=Tasks\nexport TABLE_COMMENTS=Comments\nexport TABLE_ACTIVITY_LOG=ActivityLog\nexport TABLE_USERS=Users\nexport S3_BUCKET_ORIGINALS=minijira-originals-irastack\nexport S3_BUCKET_RESIZED=minijira-resized-irastack\nexport SNS_TOPIC_ARN=arn:aws:sns:us-east-1:362612349549:minijira-assignments\nnode dist/index.js &"
+        ]
+       ]
+      }
+     }
+    },
+    "LaunchTemplateName": "minijira-template"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/LaunchTemplate"
+   }
+  },
+  "ALBAEE750D2": {
+   "Type": "AWS::ElasticLoadBalancingV2::LoadBalancer",
+   "Properties": {
+    "LoadBalancerAttributes": [
+     {
+      "Key": "deletion_protection.enabled",
+      "Value": "false"
+     }
+    ],
+    "Name": "minijira-alb",
+    "Scheme": "internet-facing",
+    "SecurityGroups": [
+     {
+      "Fn::GetAtt": [
+       "AlbSg1155C1BE",
+       "GroupId"
+      ]
+     }
+    ],
+    "Subnets": [
+     {
+      "Ref": "VPCpublicSubnet1Subnet325F50B2"
+     },
+     {
+      "Ref": "VPCpublicSubnet2Subnet2B2DFF71"
+     }
+    ],
+    "Type": "application"
+   },
+   "DependsOn": [
+    "VPCpublicSubnet1DefaultRoute19059ECD",
+    "VPCpublicSubnet1RouteTableAssociationBFFA43B7",
+    "VPCpublicSubnet2DefaultRoute9ED4D6BC",
+    "VPCpublicSubnet2RouteTableAssociation0849466B"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ALB/Resource"
+   }
+  },
+  "ALBHttpListener04CE8CD0": {
+   "Type": "AWS::ElasticLoadBalancingV2::Listener",
+   "Properties": {
+    "DefaultActions": [
+     {
+      "TargetGroupArn": {
+       "Ref": "TargetGroup3D7CD9B8"
+      },
+      "Type": "forward"
+     }
+    ],
+    "LoadBalancerArn": {
+     "Ref": "ALBAEE750D2"
+    },
+    "Port": 80,
+    "Protocol": "HTTP"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ALB/HttpListener/Resource"
+   }
+  },
+  "TargetGroup3D7CD9B8": {
+   "Type": "AWS::ElasticLoadBalancingV2::TargetGroup",
+   "Properties": {
+    "HealthCheckIntervalSeconds": 30,
+    "HealthCheckPath": "/health",
+    "HealthCheckTimeoutSeconds": 5,
+    "HealthyThresholdCount": 2,
+    "Name": "minijira-tg",
+    "Port": 3000,
+    "Protocol": "HTTP",
+    "TargetGroupAttributes": [
+     {
+      "Key": "stickiness.enabled",
+      "Value": "false"
+     }
+    ],
+    "UnhealthyThresholdCount": 2,
+    "VpcId": {
+     "Ref": "VPCB9E5F0B4"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/TargetGroup/Resource"
+   }
+  },
+  "ASG": {
+   "Type": "AWS::AutoScaling::AutoScalingGroup",
+   "Properties": {
+    "AutoScalingGroupName": "minijira-asg",
+    "DesiredCapacity": "2",
+    "HealthCheckType": "ELB",
+    "LaunchTemplate": {
+     "LaunchTemplateId": {
+      "Ref": "LaunchTemplate"
+     },
+     "Version": {
+      "Fn::GetAtt": [
+       "LaunchTemplate",
+       "LatestVersionNumber"
+      ]
+     }
+    },
+    "MaxSize": "4",
+    "MinSize": "2",
+    "Tags": [
+     {
+      "Key": "Name",
+      "PropagateAtLaunch": true,
+      "Value": "minijira-asg"
+     },
+     {
+      "Key": "Project",
+      "PropagateAtLaunch": true,
+      "Value": "minijira"
+     }
+    ],
+    "TargetGroupARNs": [
+     {
+      "Ref": "TargetGroup3D7CD9B8"
+     }
+    ],
+    "VPCZoneIdentifier": [
+     {
+      "Ref": "VPCprivateSubnet1SubnetE522290D"
+     },
+     {
+      "Ref": "VPCprivateSubnet2Subnet2F4D9530"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/ASG"
+   }
+  },
+  "OAIE1EFC67F": {
+   "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+   "Properties": {
+    "CloudFrontOriginAccessIdentityConfig": {
+     "Comment": "minijira-frontend-oai"
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/OAI/Resource"
+   }
+  },
+  "CloudFrontCFDistribution57EFBAC6": {
+   "Type": "AWS::CloudFront::Distribution",
+   "Properties": {
+    "DistributionConfig": {
+     "CacheBehaviors": [
+      {
+       "AllowedMethods": [
+        "DELETE",
+        "GET",
+        "HEAD",
+        "OPTIONS",
+        "PATCH",
+        "POST",
+        "PUT"
+       ],
+       "CachedMethods": [
+        "GET",
+        "HEAD",
+        "OPTIONS"
+       ],
+       "Compress": false,
+       "DefaultTTL": 0,
+       "ForwardedValues": {
+        "Cookies": {
+         "Forward": "all"
+        },
+        "Headers": [
+         "Authorization",
+         "Origin",
+         "Access-Control-Request-Headers",
+         "Access-Control-Request-Method"
+        ],
+        "QueryString": true
+       },
+       "MaxTTL": 0,
+       "MinTTL": 0,
+       "PathPattern": "/api/*",
+       "TargetOriginId": "origin2",
+       "ViewerProtocolPolicy": "redirect-to-https"
+      }
+     ],
+     "Comment": "minijira-frontend",
+     "CustomErrorResponses": [
+      {
+       "ErrorCode": 403,
+       "ResponseCode": 200,
+       "ResponsePagePath": "/index.html"
+      },
+      {
+       "ErrorCode": 404,
+       "ResponseCode": 200,
+       "ResponsePagePath": "/index.html"
+      }
+     ],
+     "DefaultCacheBehavior": {
+      "AllowedMethods": [
+       "GET",
+       "HEAD"
+      ],
+      "CachedMethods": [
+       "GET",
+       "HEAD"
+      ],
+      "Compress": true,
+      "ForwardedValues": {
+       "Cookies": {
+        "Forward": "none"
+       },
+       "QueryString": false
+      },
+      "TargetOriginId": "origin1",
+      "ViewerProtocolPolicy": "redirect-to-https"
+     },
+     "DefaultRootObject": "index.html",
+     "Enabled": true,
+     "HttpVersion": "http2",
+     "IPV6Enabled": true,
+     "Origins": [
+      {
+       "ConnectionAttempts": 3,
+       "ConnectionTimeout": 10,
+       "DomainName": {
+        "Fn::GetAtt": [
+         "FrontendBucketEFE2E19C",
+         "RegionalDomainName"
+        ]
+       },
+       "Id": "origin1",
+       "S3OriginConfig": {
+        "OriginAccessIdentity": {
+         "Fn::Join": [
+          "",
+          [
+           "origin-access-identity/cloudfront/",
+           {
+            "Ref": "OAIE1EFC67F"
+           }
+          ]
+         ]
+        }
+       }
+      },
+      {
+       "ConnectionAttempts": 3,
+       "ConnectionTimeout": 10,
+       "CustomOriginConfig": {
+        "HTTPPort": 80,
+        "HTTPSPort": 443,
+        "OriginKeepaliveTimeout": 5,
+        "OriginProtocolPolicy": "http-only",
+        "OriginReadTimeout": 30,
+        "OriginSSLProtocols": [
+         "TLSv1.2"
+        ]
+       },
+       "DomainName": {
+        "Fn::GetAtt": [
+         "ALBAEE750D2",
+         "DNSName"
+        ]
+       },
+       "Id": "origin2"
+      }
+     ],
+     "PriceClass": "PriceClass_100",
+     "ViewerCertificate": {
+      "CloudFrontDefaultCertificate": true
+     }
+    }
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/CloudFront/CFDistribution"
+   }
+  },
+  "DeployFrontendAwsCliLayerD774ED8F": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": "cdk-hnb659fds-assets-362612349549-us-east-1",
+     "S3Key": "e2659170a0721541efa761a8d5d04d5e36cbbf691c4b15a9053002b7c825055d.zip"
+    },
+    "Description": "/opt/awscli/aws"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DeployFrontend/AwsCliLayer/Resource",
+    "aws:asset:path": "asset.e2659170a0721541efa761a8d5d04d5e36cbbf691c4b15a9053002b7c825055d.zip",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Content"
+   }
+  },
+  "DeployFrontendCustomResource3E02C3B7": {
+   "Type": "Custom::CDKBucketDeployment",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+      "Arn"
+     ]
+    },
+    "SourceBucketNames": [
+     "cdk-hnb659fds-assets-362612349549-us-east-1"
+    ],
+    "SourceObjectKeys": [
+     "1902f2337c9c206d41640bca8676cd52aba521c000f0c0941ca67a4634e6f4d3.zip"
+    ],
+    "DestinationBucketName": {
+     "Ref": "FrontendBucketEFE2E19C"
+    },
+    "WaitForDistributionInvalidation": true,
+    "Prune": true,
+    "DistributionId": {
+     "Ref": "CloudFrontCFDistribution57EFBAC6"
+    },
+    "DistributionPaths": [
+     "/*"
+    ],
+    "OutputObjectKeys": true
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DeployFrontend/CustomResource/Default"
+   }
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265": {
+   "Type": "AWS::IAM::Role",
+   "Properties": {
+    "AssumeRolePolicyDocument": {
+     "Statement": [
+      {
+       "Action": "sts:AssumeRole",
+       "Effect": "Allow",
+       "Principal": {
+        "Service": "lambda.amazonaws.com"
+       }
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "ManagedPolicyArns": [
+     {
+      "Fn::Join": [
+       "",
+       [
+        "arn:",
+        {
+         "Ref": "AWS::Partition"
+        },
+        ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
+       ]
+      ]
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/Resource"
+   }
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF": {
+   "Type": "AWS::IAM::Policy",
+   "Properties": {
+    "PolicyDocument": {
+     "Statement": [
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::cdk-hnb659fds-assets-362612349549-us-east-1"
+          ]
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           "arn:",
+           {
+            "Ref": "AWS::Partition"
+           },
+           ":s3:::cdk-hnb659fds-assets-362612349549-us-east-1/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "FrontendBucketEFE2E19C",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "FrontendBucketEFE2E19C",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      },
+      {
+       "Action": [
+        "cloudfront:GetInvalidation",
+        "cloudfront:CreateInvalidation"
+       ],
+       "Effect": "Allow",
+       "Resource": "*"
+      },
+      {
+       "Action": [
+        "s3:GetObject*",
+        "s3:GetBucket*",
+        "s3:List*",
+        "s3:DeleteObject*",
+        "s3:PutObject",
+        "s3:PutObjectLegalHold",
+        "s3:PutObjectRetention",
+        "s3:PutObjectTagging",
+        "s3:PutObjectVersionTagging",
+        "s3:Abort*"
+       ],
+       "Effect": "Allow",
+       "Resource": [
+        {
+         "Fn::GetAtt": [
+          "DeployBucket67E2C076",
+          "Arn"
+         ]
+        },
+        {
+         "Fn::Join": [
+          "",
+          [
+           {
+            "Fn::GetAtt": [
+             "DeployBucket67E2C076",
+             "Arn"
+            ]
+           },
+           "/*"
+          ]
+         ]
+        }
+       ]
+      }
+     ],
+     "Version": "2012-10-17"
+    },
+    "PolicyName": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+    "Roles": [
+     {
+      "Ref": "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+     }
+    ]
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/ServiceRole/DefaultPolicy/Resource"
+   }
+  },
+  "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536": {
+   "Type": "AWS::Lambda::Function",
+   "Properties": {
+    "Code": {
+     "S3Bucket": "cdk-hnb659fds-assets-362612349549-us-east-1",
+     "S3Key": "3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9.zip"
+    },
+    "Environment": {
+     "Variables": {
+      "AWS_CA_BUNDLE": "/etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem"
+     }
+    },
+    "Handler": "index.handler",
+    "Layers": [
+     {
+      "Ref": "DeployFrontendAwsCliLayerD774ED8F"
+     }
+    ],
+    "Role": {
+     "Fn::GetAtt": [
+      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265",
+      "Arn"
+     ]
+    },
+    "Runtime": "python3.13",
+    "Timeout": 900
+   },
+   "DependsOn": [
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRoleDefaultPolicy88902FDF",
+    "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756CServiceRole89A01265"
+   ],
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Custom::CDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C/Resource",
+    "aws:asset:path": "asset.3423a042b818e31c1e34a19d6689ab2e5f9b70fcbe9e71df66f241b20a200bd9",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Code"
+   }
+  },
+  "DeployBackendAwsCliLayerF1F7665E": {
+   "Type": "AWS::Lambda::LayerVersion",
+   "Properties": {
+    "Content": {
+     "S3Bucket": "cdk-hnb659fds-assets-362612349549-us-east-1",
+     "S3Key": "e2659170a0721541efa761a8d5d04d5e36cbbf691c4b15a9053002b7c825055d.zip"
+    },
+    "Description": "/opt/awscli/aws"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DeployBackend/AwsCliLayer/Resource",
+    "aws:asset:path": "asset.e2659170a0721541efa761a8d5d04d5e36cbbf691c4b15a9053002b7c825055d.zip",
+    "aws:asset:is-bundled": false,
+    "aws:asset:property": "Content"
+   }
+  },
+  "DeployBackendCustomResource98C10F89": {
+   "Type": "Custom::CDKBucketDeployment",
+   "Properties": {
+    "ServiceToken": {
+     "Fn::GetAtt": [
+      "CustomCDKBucketDeployment8693BB64968944B69AAFB0CC9EB8756C81C01536",
+      "Arn"
+     ]
+    },
+    "SourceBucketNames": [
+     "cdk-hnb659fds-assets-362612349549-us-east-1"
+    ],
+    "SourceObjectKeys": [
+     "047c887f678a4744e31b89fc44c8256dcf263a3390f6df4ad8c473eaba316589.zip"
+    ],
+    "DestinationBucketName": {
+     "Ref": "DeployBucket67E2C076"
+    },
+    "WaitForDistributionInvalidation": true,
+    "Prune": true,
+    "OutputObjectKeys": true
+   },
+   "UpdateReplacePolicy": "Delete",
+   "DeletionPolicy": "Delete",
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/DeployBackend/CustomResource/Default"
+   }
+  },
+  "Dashboard9E4231ED": {
+   "Type": "AWS::CloudWatch::Dashboard",
+   "Properties": {
+    "DashboardBody": {
+     "Fn::Join": [
+      "",
+      [
+       "{\"widgets\":[{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Tasks Created Per Day\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"MiniJira\",\"TasksCreated\",{\"period\":86400,\"stat\":\"Sum\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":0,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Tasks Closed Per Team Per Day\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"stacked\":true,\"metrics\":[[{\"expression\":\"SEARCH('{MiniJira, Team} MetricName=\\\"TasksClosed\\\"', 'Sum', 86400)\"}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Average Time to Close\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"MiniJira\",\"TimeToClose\",{\"period\":86400}]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":6,\"y\":6,\"properties\":{\"view\":\"timeSeries\",\"title\":\"EC2 CPU Utilization\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"AWS/EC2\",\"CPUUtilization\"]],\"yAxis\":{}}},{\"type\":\"metric\",\"width\":6,\"height\":6,\"x\":0,\"y\":12,\"properties\":{\"view\":\"timeSeries\",\"title\":\"Overdue Tasks\",\"region\":\"",
+       {
+        "Ref": "AWS::Region"
+       },
+       "\",\"metrics\":[[\"MiniJira\",\"OverdueTasks\",{\"period\":3600,\"stat\":\"Maximum\"}]],\"yAxis\":{}}}]}"
+      ]
+     ]
+    },
+    "DashboardName": "minijira-dashboard"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/Dashboard/Resource"
+   }
+  },
+  "HighCpuAlarm40723000": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "AssignmentsTopic2F290ED2"
+     }
+    ],
+    "AlarmName": "minijira-high-cpu",
+    "ComparisonOperator": "GreaterThanThreshold",
+    "EvaluationPeriods": 2,
+    "MetricName": "CPUUtilization",
+    "Namespace": "AWS/EC2",
+    "Period": 300,
+    "Statistic": "Average",
+    "Threshold": 80
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/HighCpuAlarm/Resource"
+   }
+  },
+  "OverdueTasksAlarm7080FFA6": {
+   "Type": "AWS::CloudWatch::Alarm",
+   "Properties": {
+    "AlarmActions": [
+     {
+      "Ref": "AssignmentsTopic2F290ED2"
+     }
+    ],
+    "AlarmName": "minijira-overdue-tasks",
+    "ComparisonOperator": "GreaterThanThreshold",
+    "EvaluationPeriods": 1,
+    "MetricName": "OverdueTasks",
+    "Namespace": "MiniJira",
+    "Period": 3600,
+    "Statistic": "Maximum",
+    "Threshold": 10
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/OverdueTasksAlarm/Resource"
+   }
+  },
+  "CDKMetadata": {
+   "Type": "AWS::CDK::Metadata",
+   "Properties": {
+    "Analytics": "v2:deflate64:H4sIAAAAAAAA/8VVS28TMRD+LeTsGgiiB27bpK0iFbokoRwQirzeaeLWay9+JESr/e+M7X0dKqRKSFzW3zzsmfF8np3T+cdL+u4NO9kLXj5fSFHQZuMYfyao2jXA57R5qDlZPKqHfEFyX0jBN75Q4IJuRGvtHWxZIWHUj7rMWs0Fc0KrwTmA61Ueli/M3TIHJ3YmuRFHhOPBK+XAIO4dUiadlDnM9VCBcmQD3BvhzrdG+zrm8FfFSu0NWBv0d8wrfthCVUs8tSVc75VwmjbfLJhcaxmcBtyDhRQh7MTUaXpxqSsm1NQhaVoiWVWUjDZoysFUwtpwLzeYRX9BA74+4pEb7Q2Hz6yuhdrHa3tRe8fOYB7AxNM2qJTg9HBUS8qzYpUuscNDnyJoif1AmyvPn9ONJ/SjmVXit1CzT7MpOwIt0D2aLE2umXd6CRgN7osn4M7OWvIfd/8kyZRr5Op5rCjJr6grbcDn4CBQ7HWJ/ePNfVFXzGLDBKtos9apiXEdix3RSlnHFIfc6EcR+4wBmq2uRXzQCeBLs9yIuqfeVMYdv3DHVw8+RkogfscoEzEwadcwa8FZmoWFlFBLfQ5FdKUtB0VLIPAYA6x9V4kPWYJk1gkuNSsLJrEApPIR51BW1xgkDpE7tF1FG5hI/ak89RPWgep8ejyxb5nZ42jpJ8REbAlDZlnOJEanaAtE2yQx+WOCvnw0Gitr7o3YC5VxjiNlVWJROGbCgYvgcxN8XvYYzN+hWGJ+RhS+b8RUblO0E3P8QJsls4dCM1NGt0HIJDNVUEXQtmQNNs4IsvDW6WoU8aZfNiFTjqIEE1hGYgORg/tuvuTMsAofmukG2E6GgbND/nIpaHayOADjDArO997VHlusdAn0yb49zi/pe/zTPFkhLozH+iug67T+AUBBhc6GBgAA"
+   },
+   "Metadata": {
+    "aws:cdk:path": "MiniJiraStack/CDKMetadata/Default"
+   }
+  }
+ },
+ "Parameters": {
+  "SsmParameterValueawsserviceamiamazonlinuxlatestal2023amikernel61x8664C96584B6F00A464EAD1953AFF4B05118Parameter": {
+   "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+   "Default": "/aws/service/ami-amazon-linux-latest/al2023-ami-kernel-6.1-x86_64"
+  },
+  "BootstrapVersion": {
+   "Type": "AWS::SSM::Parameter::Value<String>",
+   "Default": "/cdk-bootstrap/hnb659fds/version",
+   "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]"
+  }
+ },
+ "Outputs": {
+  "FrontendUrl": {
+   "Description": "CloudFront URL for the frontend",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Fn::GetAtt": [
+        "CloudFrontCFDistribution57EFBAC6",
+        "DomainName"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "ApiUrl": {
+   "Description": "ALB DNS name for API calls",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "http://",
+      {
+       "Fn::GetAtt": [
+        "ALBAEE750D2",
+        "DNSName"
+       ]
+      }
+     ]
+    ]
+   }
+  },
+  "CognitoDomain": {
+   "Description": "Cognito Hosted UI domain",
+   "Value": {
+    "Fn::Join": [
+     "",
+     [
+      "https://",
+      {
+       "Ref": "UserPoolDomain5479B217"
+      },
+      ".auth.us-east-1.amazoncognito.com"
+     ]
+    ]
+   }
+  },
+  "UserPoolId": {
+   "Description": "Cognito User Pool ID",
+   "Value": {
+    "Ref": "UserPool6BA7E5F2"
+   }
+  },
+  "ClientId": {
+   "Description": "Cognito App Client ID",
+   "Value": {
+    "Ref": "UserPoolClient2F5918F7"
+   }
+  }
+ },
+ "Rules": {
+  "CheckBootstrapVersion": {
+   "Assertions": [
+    {
+     "Assert": {
+      "Fn::Not": [
+       {
+        "Fn::Contains": [
+         [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+         ],
+         {
+          "Ref": "BootstrapVersion"
+         }
+        ]
+       }
+      ]
+     },
+     "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI."
+    }
+   ]
+  }
+ }
+}
