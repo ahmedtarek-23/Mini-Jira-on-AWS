@@ -1,0 +1,1 @@
+{"version":3,"file":"cloudwatch.d.ts","sourceRoot":"","sources":["../../src/services/cloudwatch.ts"],"names":[],"mappings":"AAIA,wBAAsB,SAAS,CAAC,UAAU,EAAE,MAAM,EAAE,KAAK,EAAE,MAAM,EAAE,UAAU,EAAE;IAAE,IAAI,EAAE,MAAM,CAAC;IAAC,KAAK,EAAE,MAAM,CAAA;CAAE,EAAE,iBAe/G"}
